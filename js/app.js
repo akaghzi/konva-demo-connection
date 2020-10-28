@@ -110,13 +110,13 @@ circle1.on('mouseout', () => {
 circle1.on('dblclick', (e)=>{
 })
 
-const createConnection = () => {
-  const startX = circle0.position().x + circle0.getAttr('outputOffsets').x[0]
-  const startY = circle0.position().y
-  const endX = circle1.position().x + circle1.getAttr('inputOffsets').x[0]
-  const endY = circle1.position().y
+const createConnection = (unitOperationFrom, unitOperationTo) => {
+  const startX = unitOperationFrom.position().x + unitOperationFrom.getAttr('outputOffsets').x[0]
+  const startY = unitOperationFrom.position().y
+  const endX = unitOperationTo.position().x + circle1.getAttr('inputOffsets').x[0]
+  const endY = unitOperationTo.position().y
   const midX = startX + Math.floor((endX - startX)/2)
-  const connName = `${circle0.name()}-${circle1.name()}-${Math.floor(Math.random()*100)}`
+  const connName = `${unitOperationFrom.name()}-${unitOperationTo.name()}-${Math.floor(Math.random()*100)}`
   const points = [startX, startY,
               midX, startY,
               midX, endY,
@@ -129,14 +129,14 @@ const createConnection = () => {
     id: connName
   })
   connection.addName('conn0')
-  circle0.getAttr('outputs').push(connection.getAttr('id'))
-  circle1.getAttr('inputs').push(connection.getAttr('id'))
+  unitOperationFrom.getAttr('outputs').push(connection.getAttr('id'))
+  unitOperationTo.getAttr('inputs').push(connection.getAttr('id'))
   layer.add(connection)
   layer.show()
   localStorage.setItem('layer',JSON.stringify(layer.toJSON()))
 }
 const btn1 = document.querySelector("#btn-1")
-btn1.addEventListener('click', createConnection)
+btn1.addEventListener('click', createConnection(circle0, circle1))
 layer.add(circle0)
 layer.add(circle1)
 stage.add(layer)
