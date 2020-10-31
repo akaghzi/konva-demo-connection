@@ -3,12 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <title>Konva</title>
+  <link rel="icon" type="image/ico" href="img/favicon.ico" />
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #f0f0f0;
+      }
+      #menu {
+          display: none;
+          position: absolute;
+          width: 60px;
+          background-color: white;
+          box-shadow: 0 0 5px grey;
+          border-radius: 3px;
+      }
+      #menu button {
+          width: 100%;
+          background-color: white;
+          border: none;
+          margin: 0;
+          padding: 10px;
+      }
+      #menu button:hover {
+          background-color: lightgray;
+      }
+  </style>
+  <!--  <link rel="stylesheet" href="css/styles.css">-->
 </head>
 <body>
-<button id="btn-1">Connect</button>
-<div id="kroot">
+<div id="kroot"></div>
+<button id="btn-1">Connect1</button>
+<button id="btn-2">Connect2</button>
+<div id="menu">
+  <div>
+    <button id="delete-button">Delete</button>
+  </div>
 </div>
 <script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
+<script src="js/createCircle.js"></script>
+<script src="js/createRect.js"></script>
+<script src="js/addConnection.js"></script>
+<script src="js/updateConnection.js"></script>
+<script src="js/activateStageTriggers.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
