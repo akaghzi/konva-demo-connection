@@ -1,4 +1,4 @@
-const createCircle = ({name, x=250, y, radius, color}) => {
+const createCircle = ({name, x=250, y=100, radius=40, color}) => {
   const circle = new Konva.Circle({
     id: name,
     x,

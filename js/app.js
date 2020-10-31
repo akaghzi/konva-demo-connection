@@ -14,7 +14,22 @@ let currentShape;
 const menu = document.getElementById('menu');
 
 document.getElementById('delete-button').addEventListener('click', () => {
-  console.log(currentShape)
+  // console.log(currentShape)
+  const connections = currentShape.getAttr('connections')
+  if(connections.length > 0){
+    connections.forEach((connection)=>{
+      const conn = stage.findOne(`#${connection}`)
+      // console.log('connection',conn)
+      const source = stage.findOne(`#${connection.split('-')[0]}`)
+      // console.log('source',source)
+      const sourceConnections = source.getAttr('connections')
+      source.setAttr('connections', sourceConnections.filter((c)=>c!==connection))
+      const target = stage.findOne(`#${connection.split('-')[1]}`)
+      const targetConnections = target.getAttr('connections')
+      target.setAttr('connections', targetConnections.filter((c)=>c!==connection))
+      conn.destroy()
+    })
+  }
   currentShape.destroy();
   layer.draw();
 });

@@ -1,12 +1,12 @@
 const addConnection= (connection) => {
   // console.log(connection)
-  const from = stage.findOne(`#${connection.source}`)
-  const to = stage.findOne(`#${connection.target}`)
-  const connName = `${connection.source}-${connection.target}-${Math.floor(Math.random()*100)}`
-  const startX = connection.startPosition.x
-  const startY = connection.startPosition.y
-  const endX = connection.endPosition.x
-  const endY = connection.endPosition.y
+  const from = stage.findOne(`#${connection.source.name}`)
+  const to = stage.findOne(`#${connection.target.name}`)
+  const connName = `${connection.source.name}-${connection.target.name}-${Math.floor(Math.random()*100)}`
+  const startX = connection.source.startPosition.x
+  const startY = connection.source.startPosition.y
+  const endX = connection.target.endPosition.x
+  const endY = connection.target.endPosition.y
   const midX = startX + Math.floor((endX - startX)/2)
   const startXOffset = startX-from.x()
   const startYOffset = startY-from.y()
