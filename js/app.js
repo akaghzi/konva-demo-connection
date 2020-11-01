@@ -107,6 +107,9 @@ const redCircle = stage.findOne('#redCircle')
 addMyShape({id: 'myShape', color: '#00D2FF'})
 const myShape = stage.findOne('#myShape');
 
+addNewShape({id: 'newShape', color: '#00D2FF'})
+const newShape = stage.findOne('#newShape');
+
 activateStageTriggers(stage)
 
 // createConnection(greenCircle, blueCircle)
