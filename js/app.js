@@ -11,10 +11,11 @@ stage.add(layer)
 layer.draw()
 
 let currentShape;
-const menu = document.getElementById('menu');
+const contextMenu = document.getElementById('contextMenu');
+const addMenu = document.getElementById('addMenu');
 
 document.getElementById('delete-button').addEventListener('click', () => {
-  // console.log(currentShape)
+  console.log(currentShape)
   const connections = currentShape.getAttr('connections')
   if(connections.length > 0){
     connections.forEach((connection)=>{
@@ -33,10 +34,17 @@ document.getElementById('delete-button').addEventListener('click', () => {
   currentShape.destroy();
   layer.draw();
 });
+document.getElementById('addFormSubmit').addEventListener('click', (e)=>{
+  e.preventDefault()
+  // console.log(e)
+
+  processAddForm()
+})
 
 window.addEventListener('click', () => {
   // hide menu
-  menu.style.display = 'none';
+  contextMenu.style.display = 'none';
+  addMenu.style.display = 'none';
 });
 
 stage.on('contextmenu', function (e) {
@@ -44,18 +52,20 @@ stage.on('contextmenu', function (e) {
   e.evt.preventDefault();
   if (e.target === stage) {
     // if we are on empty place of the stage we will do nothing
+    // getContextMenu()
     return;
   }
   currentShape = e.target;
   // console.log(currentShape)
+  addMenu.style.display = 'none'
   // show menu
-  menu.style.display = 'initial';
+  contextMenu.style.display = 'initial';
   const containerRect = stage.container().getBoundingClientRect();
   // console.log(containerRect)
   // console.log(stage.getPointerPosition())
-  menu.style.top =
+  contextMenu.style.top =
       containerRect.top + stage.getPointerPosition().y + 6 + 'px';
-  menu.style.left =
+  contextMenu.style.left =
       containerRect.left + stage.getPointerPosition().x + 4 + 'px';
 });
 
@@ -79,7 +89,7 @@ createCircle({
 const blueCircle = stage.findOne('#blueCircle')
 
 createCircle({
-  x: 50,
+  x: 300,
   y: 250,
   radius: 50,
   color: 'red',
@@ -87,13 +97,15 @@ createCircle({
 })
 const redCircle = stage.findOne('#redCircle')
 
-createRect({
-  name: 'rect0',
-  x: 100,
-  y: 300,
-  color: 'pink'
-})
-const rect0 = stage.findOne('#rect0')
+// addFlashDrum({
+//   id: 'flashDrum',
+//   x: 700,
+//   y: 400,
+// })
+// const flashDrum = stage.findOne('#flashDrum')
+
+addMyShape({id: 'myShape', color: '#00D2FF'})
+const myShape = stage.findOne('#myShape');
 
 activateStageTriggers(stage)
 

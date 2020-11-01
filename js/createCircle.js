@@ -1,4 +1,4 @@
-const createCircle = ({name, x=250, y=100, radius=40, color}) => {
+const createCircle = ({name, x=250, y=100, radius=40, color, draggable=true}) => {
   const circle = new Konva.Circle({
     id: name,
     x,
@@ -6,7 +6,7 @@ const createCircle = ({name, x=250, y=100, radius=40, color}) => {
     radius,
     fill: color,
     connections: [],
-    draggable: true,
+    draggable: draggable,
     name: 'process'
   })
 
