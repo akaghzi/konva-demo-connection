@@ -25,7 +25,8 @@ const addConnection= (connection) => {
     startOffset: {x: startXOffset, y: startYOffset},
     endOffset: {x: endXOffset, y: endYOffset},
     draggable: false,
-    name: 'process'
+    name: 'process',
+    connections: [connName]
   })
   from.getAttr('connections').push(connName)
   to.getAttr('connections').push(connName)

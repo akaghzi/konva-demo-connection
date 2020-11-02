@@ -13,17 +13,16 @@ const addMenu = document.getElementById('addMenu');
 
 document.getElementById('delete-button').addEventListener('click', () => {
   console.log(currentShape)
-  // removeShape(currentShape)
   const connections = currentShape.getAttr('connections')
-  if(connections.length > 0){
-    connections.forEach((connection)=>{
+  if (connections.length > 0) {
+    connections.forEach((connection) => {
       const conn = stage.findOne(`#${connection}`)
       const source = stage.findOne(`#${connection.split('-')[0]}`)
       const sourceConnections = source.getAttr('connections')
-      source.setAttr('connections', sourceConnections.filter((c)=>c!==connection))
+      source.setAttr('connections', sourceConnections.filter((c) => c !== connection))
       const target = stage.findOne(`#${connection.split('-')[1]}`)
       const targetConnections = target.getAttr('connections')
-      target.setAttr('connections', targetConnections.filter((c)=>c!==connection))
+      target.setAttr('connections', targetConnections.filter((c) => c !== connection))
       conn.destroy()
     })
   }
@@ -31,7 +30,7 @@ document.getElementById('delete-button').addEventListener('click', () => {
   layer.draw();
 });
 
-document.getElementById('addForm').addEventListener('submit', (e)=>{
+document.getElementById('addForm').addEventListener('submit', (e) => {
   e.preventDefault()
   processAddForm(e.target)
 })
@@ -77,7 +76,7 @@ const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', name: 
 const myShape = addMyShape({id: 'myShape', color: '#00D2FF'})
 // const myShape = stage.findOne('#myShape');
 
-const newShape = addNewShape({id: 'newShape', color: '#00D2FF'})
+// const newShape = addNewShape({id: 'newShape', color: '#00D2FF'})
 // const newShape = stage.findOne('#newShape');
 
 activateStageTriggers(stage)
