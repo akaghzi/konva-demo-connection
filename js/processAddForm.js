@@ -1,22 +1,22 @@
-const processAddForm = ()=>{
-  // console.log()
-  // console.log('processing addForm')
-  // console.log(form.elements)
-  const tagName = document.getElementById('id').value
-  const color = document.getElementById('color').value
-  const unitOp = document.getElementById('type').value
-  const x = document.getElementById('x').value
-  const y = document.getElementById('y').value
-  switch(unitOp){
-    case 'circle':
-      createCircle({
-        x,
-        y,
-        color,
-        name: tagName
-      })
+const processAddForm = (form)=>{
+  const tagName = form.elements.namedItem('id').value
+  console.log(tagName)
+  const color = form.elements.namedItem('color').value
+  console.log(color)
+  const unitOperation = form.elements.namedItem('type').value
+  console.log(unitOperation)
+  switch(unitOperation){
+    case 'Circle':
+      createCircle({x:100, y: 100, color, name: tagName})
+      form.reset()
+      return
+    case 'Rect':
+      createRect({x:100, y:100, name:tagName, color})
+      form.reset()
+      return
     default:
       console.log('info required')
+      form.reset()
   }
   // const pNode = document.createElement('p')
   // const textNode = document.createTextNode('Error occured')

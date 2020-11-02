@@ -27,6 +27,7 @@ const addMyShape = ({id, color}) => {
 
   layer.add(myShape)
   layer.draw()
+  return myShape
 }
 
 const addNewShape = ({id, color}) => {
@@ -52,5 +53,5 @@ const addNewShape = ({id, color}) => {
 
   layer.add(newShape)
   layer.draw()
-
+  return newShape
 }

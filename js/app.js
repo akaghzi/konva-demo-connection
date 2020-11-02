@@ -3,9 +3,6 @@ const stage = new Konva.Stage({
   width: 1080,
   height: 900
 })
-// stage.on('dblclick', () => {
-//   console.log('stage double clicked')
-// })
 const layer = new Konva.Layer()
 stage.add(layer)
 layer.draw()
@@ -16,13 +13,12 @@ const addMenu = document.getElementById('addMenu');
 
 document.getElementById('delete-button').addEventListener('click', () => {
   console.log(currentShape)
+  // removeShape(currentShape)
   const connections = currentShape.getAttr('connections')
   if(connections.length > 0){
     connections.forEach((connection)=>{
       const conn = stage.findOne(`#${connection}`)
-      // console.log('connection',conn)
       const source = stage.findOne(`#${connection.split('-')[0]}`)
-      // console.log('source',source)
       const sourceConnections = source.getAttr('connections')
       source.setAttr('connections', sourceConnections.filter((c)=>c!==connection))
       const target = stage.findOne(`#${connection.split('-')[1]}`)
@@ -34,17 +30,16 @@ document.getElementById('delete-button').addEventListener('click', () => {
   currentShape.destroy();
   layer.draw();
 });
-document.getElementById('addFormSubmit').addEventListener('click', (e)=>{
-  e.preventDefault()
-  // console.log(e)
 
-  processAddForm()
+document.getElementById('addForm').addEventListener('submit', (e)=>{
+  e.preventDefault()
+  processAddForm(e.target)
 })
 
 window.addEventListener('click', () => {
   // hide menu
   contextMenu.style.display = 'none';
-  addMenu.style.display = 'none';
+  // addMenu.style.display = 'none';
 });
 
 stage.on('contextmenu', function (e) {
@@ -57,62 +52,35 @@ stage.on('contextmenu', function (e) {
   }
   currentShape = e.target;
   // console.log(currentShape)
-  addMenu.style.display = 'none'
+  // addMenu.style.display = 'none'
   // show menu
   contextMenu.style.display = 'initial';
-  const containerRect = stage.container().getBoundingClientRect();
+  // const containerRect = stage.container().getBoundingClientRect();
   // console.log(containerRect)
   // console.log(stage.getPointerPosition())
   contextMenu.style.top =
-      containerRect.top + stage.getPointerPosition().y + 6 + 'px';
+      stage.getPointerPosition().y + 6 + 'px';
   contextMenu.style.left =
-      containerRect.left + stage.getPointerPosition().x + 4 + 'px';
+      stage.getPointerPosition().x + 12 + 'px';
 });
 
-createCircle({
-  x: 50,
-  y: 50,
-  radius: 40,
-  color: 'green',
-  name: 'greenCircle'
-})
-const greenCircle = stage.findOne('#greenCircle')
-// console.log(circle0)
+const greenCircle = createCircle({x: 50, y: 50, radius: 40, color: 'green', name: 'greenCircle'})
+// createCircle({x: 50, y: 50, radius: 40, color: 'green', name: 'greenCircle'})
+// const greenCircle = stage.findOne('#greenCircle')
 
-createCircle({
-  x: 250,
-  y: 250,
-  radius: 50,
-  color: 'blue',
-  name: 'blueCircle'
-})
-const blueCircle = stage.findOne('#blueCircle')
+const blueCircle = createCircle({x: 250, y: 250, radius: 50, color: 'blue', name: 'blueCircle'})
+// const blueCircle = stage.findOne('#blueCircle')
+//
+const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', name: 'redCircle'})
+// const redCircle = stage.findOne('#redCircle')
 
-createCircle({
-  x: 300,
-  y: 250,
-  radius: 50,
-  color: 'red',
-  name: 'redCircle'
-})
-const redCircle = stage.findOne('#redCircle')
+const myShape = addMyShape({id: 'myShape', color: '#00D2FF'})
+// const myShape = stage.findOne('#myShape');
 
-// addFlashDrum({
-//   id: 'flashDrum',
-//   x: 700,
-//   y: 400,
-// })
-// const flashDrum = stage.findOne('#flashDrum')
-
-addMyShape({id: 'myShape', color: '#00D2FF'})
-const myShape = stage.findOne('#myShape');
-
-addNewShape({id: 'newShape', color: '#00D2FF'})
-const newShape = stage.findOne('#newShape');
+const newShape = addNewShape({id: 'newShape', color: '#00D2FF'})
+// const newShape = stage.findOne('#newShape');
 
 activateStageTriggers(stage)
-
-// createConnection(greenCircle, blueCircle)
 
 // const btn1 = document.querySelector("#btn-1")
 // btn1.addEventListener('click', createConnection(circle0, circle1))

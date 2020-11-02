@@ -10,19 +10,8 @@ const createRect = ({name, x=250, y=250, height=30, width=40, color }) => {
     draggable: true,
     name: 'process'
   })
-  rect.on('dragend', (e) => {
-    const ct = e.currentTarget
-    if (ct.getAttr('connections').length > 0) {
-      updateConnection(ct.getAttr('connections'))
-    }
-  })
-  rect.on('mouseover', () => {
-    document.body.style.cursor = 'pointer';
-  })
-  rect.on('mouseout', () => {
-    document.body.style.cursor = 'default';
-  })
-
+  addListeners(rect)
   layer.add(rect)
   layer.draw()
+  return rect
 }
