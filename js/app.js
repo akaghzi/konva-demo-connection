@@ -13,21 +13,7 @@ const addMenu = document.getElementById('addMenu');
 
 document.getElementById('delete-button').addEventListener('click', () => {
   console.log(currentShape)
-  const connections = currentShape.getAttr('connections')
-  if (connections.length > 0) {
-    connections.forEach((connection) => {
-      const conn = stage.findOne(`#${connection}`)
-      const source = stage.findOne(`#${connection.split('-')[0]}`)
-      const sourceConnections = source.getAttr('connections')
-      source.setAttr('connections', sourceConnections.filter((c) => c !== connection))
-      const target = stage.findOne(`#${connection.split('-')[1]}`)
-      const targetConnections = target.getAttr('connections')
-      target.setAttr('connections', targetConnections.filter((c) => c !== connection))
-      conn.destroy()
-    })
-  }
-  currentShape.destroy();
-  layer.draw();
+  removeShape(currentShape)
 });
 
 document.getElementById('addForm').addEventListener('submit', (e) => {
@@ -73,7 +59,7 @@ const blueCircle = createCircle({x: 250, y: 250, radius: 50, color: 'blue', name
 const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', name: 'redCircle'})
 // const redCircle = stage.findOne('#redCircle')
 
-const myShape = addMyShape({id: 'myShape', color: '#00D2FF'})
+const customShape = createCustomShape({name: 'customShape', color: '#00D2FF'})
 // const myShape = stage.findOne('#myShape');
 
 // const newShape = addNewShape({id: 'newShape', color: '#00D2FF'})

@@ -13,16 +13,6 @@ const newConnection = {
       x: undefined,
       y: undefined
     }
-  },
-  osource: '',
-  ostartPosition: {
-    x: undefined,
-    y: undefined
-  },
-  otarget: '',
-  oendPosition: {
-    x: undefined,
-    y: undefined
   }
 }
 // console.log(newConnection)
