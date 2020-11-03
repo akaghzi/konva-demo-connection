@@ -50,20 +50,12 @@ stage.on('contextmenu', function (e) {
 });
 
 const greenCircle = createCircle({x: 50, y: 50, radius: 40, color: 'green', name: 'greenCircle'})
-// createCircle({x: 50, y: 50, radius: 40, color: 'green', name: 'greenCircle'})
-// const greenCircle = stage.findOne('#greenCircle')
 
 const blueCircle = createCircle({x: 250, y: 250, radius: 50, color: 'blue', name: 'blueCircle'})
-// const blueCircle = stage.findOne('#blueCircle')
-//
+
 const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', name: 'redCircle'})
-// const redCircle = stage.findOne('#redCircle')
 
 const customShape = createCustomShape({name: 'customShape', color: '#00D2FF'})
-// const myShape = stage.findOne('#myShape');
-
-// const newShape = addNewShape({id: 'newShape', color: '#00D2FF'})
-// const newShape = stage.findOne('#newShape');
 
 activateStageTriggers(stage)
 

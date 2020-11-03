@@ -20,8 +20,8 @@ const updateConnection = (names) =>{
     points[3] = startY
     points[4] = midX
     points[5] = endY
-    points[6] = endX
-    points[7] = endY
+    points[points.length-2] = endX
+    points[points.length-1] = endY
     // layer.draw()
   })
   layer.batchDraw()

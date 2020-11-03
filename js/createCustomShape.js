@@ -14,6 +14,7 @@ const createCustomShape = ({name, color}) => {
       context.closePath();
       // (!) Konva specific method, it is very important
       context.fillStrokeShape(shape);
+      // console.log(shape)
     },
     id: name,
     fill: color,

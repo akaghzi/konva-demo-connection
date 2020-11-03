@@ -17,13 +17,15 @@ const addConnection= (connection) => {
     midX, endY,
     endX, endY]
 
-  const conn = new Konva.Line({
+  const conn = new Konva.Arrow({
     id: connName,
     strokeWidth: 2,
-    stroke: 'blue',
+    stroke: 'grey',
     points: points,
     startOffset: {x: startXOffset, y: startYOffset},
     endOffset: {x: endXOffset, y: endYOffset},
+    pointerLength: 5,
+    pointerWidth: 5,
     draggable: false,
     name: 'process',
     connections: [connName]
