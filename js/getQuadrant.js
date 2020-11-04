@@ -1,5 +1,6 @@
 const getQuadrant = (pos, obj) => {
   const boundary = obj.getAttr('boundary')
+  console.log(boundary)
   let quadrant =''
   if(pos.y < (boundary.y + Math.floor(boundary.h/2))){
     quadrant = 'top'
