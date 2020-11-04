@@ -1,6 +1,6 @@
-const createRect = ({name, x=250, y=250, height=30, width=40, color }) => {
+const createRect = ({tagName, x=250, y=250, height=30, width=40, color }) => {
   const rect = new Konva.Rect({
-    id: name,
+    id: tagName,
     x,
     y,
     height,

@@ -49,13 +49,15 @@ stage.on('contextmenu', function (e) {
       stage.getPointerPosition().x + 12 + 'px';
 });
 
-const greenCircle = createCircle({x: 50, y: 50, radius: 40, color: 'green', name: 'greenCircle'})
+const greenCircle = createCircle({x: 50, y: 50, radius: 40, color: 'green', tagName: 'greenCircle'})
 
-const blueCircle = createCircle({x: 250, y: 250, radius: 50, color: 'blue', name: 'blueCircle'})
+// const blueCircle = createCircle({x: 250, y: 250, radius: 50, color: 'blue', tagName: 'blueCircle'})
 
-const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', name: 'redCircle'})
+const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', tagName: 'redCircle'})
 
-const customShape = createCustomShape({name: 'customShape', color: '#00D2FF'})
+const customShape1 = createCustomShape({tagName: 'customShape1', color: '#00D2FF'})
+
+const customShape2 = createCustomShape({tagName: 'customShape2', x: 400, y: 50, w:60, h:80, td: 20, color: 'orange'})
 
 activateStageTriggers(stage)
 

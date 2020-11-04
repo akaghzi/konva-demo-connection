@@ -33,7 +33,6 @@ const activateStageTriggers = () => {
             return
           }
         }
-
         console.log('adding connection')
         addConnection(conn)
       }

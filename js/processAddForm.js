@@ -20,7 +20,7 @@ const processAddForm = (form)=>{
       form.reset()
       return
     case 'Custom':
-      createCustomShape({x:100, y:100, name:tagName, color})
+      createCustomShape({x:100, y:100, tagName, color})
       form.reset()
       return
     default:
