@@ -3,13 +3,14 @@ const createCustomShape = ({name, color}) => {
     sceneFunc: (context, shape) => {
       context.beginPath();
       context.moveTo(200, 50); //starting point
-      context.lineTo(250, 50); //endpoint of line & starting point of following line
-      context.lineTo(250, 120);//endpoint of line & starting point of following line
-      context.lineTo(200, 120);//endpoint of line & starting point of following line
-      context.lineTo(200, 50)//endpoint of line & starting point of following QC
+      context.rect(200,50,50,70)
+      // context.lineTo(250, 50); //endpoint of line & starting point of following line
+      // context.lineTo(250, 120);//endpoint of line & starting point of following line
+      // context.lineTo(200, 120);//endpoint of line & starting point of following line
+      // context.lineTo(200, 50)//endpoint of line & starting point of following QC
       // QC top point of curve is first x,y & last x, y is end of curve
       context.quadraticCurveTo(225, 40, 250, 50)
-      context.lineTo(250, 120);
+      context.moveTo(250, 120);
       context.quadraticCurveTo(225, 130, 200, 120)
       context.closePath();
       // (!) Konva specific method, it is very important
