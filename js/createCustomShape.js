@@ -34,7 +34,7 @@ const createCustomShape = ({tagName, x=200, y=50, w=50, h=70, td=20, color}) => 
     draggable: true,
     name: 'process',
     connections: [],
-    boundary: {x: x, y:y, w:w, h: h+(td*2)}
+    boundary: {x: x, y:y, w:w, h: h+(td*2)} //should be rectangle / square
   });
   addListeners(customShape)
   layer.add(customShape)
