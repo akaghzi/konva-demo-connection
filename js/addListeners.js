@@ -40,7 +40,7 @@ const addListeners = (shape) => {
     if(ct instanceof Konva.Circle){
       return
     } else if(ct instanceof Konva.Shape) {
-      console.log(getQuadrant(stage.getPointerPosition(),ct))
+      console.log(getHitRegion(stage.getPointerPosition(),ct))
     }
   })
 }

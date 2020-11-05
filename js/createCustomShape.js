@@ -25,13 +25,14 @@ const createCustomShape = ({tagName, x = 200, y = 50, w = 50, h = 70, td = 20, c
     draggable: true,
     name: 'process',
     connections: [],
-    boundary: {x: x, y: y - td, w: w, h: h + (td * 2)}, //should be rectangle / square
+    boundary: {x: x, y: y - Math.floor(td/2), w: w, h: h + td}, //should be rectangle / square
     hitRegions: [
-      {name: 'top', boundary: {x, y: y - td, w, h: y - td + y}},
-      {name: 'left', boundary: {x, y: y - td, w, h: y - td + y}},
-      {name: 'right', boundary: {x, y: y - td, w, h: y - td + y}},
-      {name: 'bottom', boundary: {x, y: y - td, w, h: y - td + y}},
-    ]
+      {name: 'top', boundary: {x, y: y - Math.floor(td/2), w, h: Math.floor(td/2)}},
+      {name: 'left', boundary: {x, y, w: Math.floor(w / 2), h}},
+      {name: 'right', boundary: {x: x + Math.floor(w / 2), y, w: Math.floor(w / 2), h}},
+      {name: 'bottom', boundary: {x, y: y + h, w, h: Math.floor(td/2)}},
+    ],
+    opacity: 0.85
   });
   addListeners(CustomShape)
   layer.add(CustomShape)
