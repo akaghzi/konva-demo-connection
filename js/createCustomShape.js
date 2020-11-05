@@ -1,5 +1,9 @@
 const createCustomShape = ({tagName, x=200, y=50, w=50, h=70, td=20, color}) => {
-  const customShape = new Konva.Shape({
+  if(stage.findOne(`#${tagName}`)){
+    throw new Error('Unit operation with same tagname already exists')
+    return
+  }
+  const CustomShape = new Konva.Shape({
     sceneFunc: (context, shape) => {
       context.beginPath();
       // context.moveTo(200, 50); //starting point
@@ -12,20 +16,21 @@ const createCustomShape = ({tagName, x=200, y=50, w=50, h=70, td=20, color}) => 
       context.quadraticCurveTo(x+Math.floor(w/2), y-td, x+w, y)
       context.moveTo(x, y+h);
       context.quadraticCurveTo(x+Math.floor(w/2), y+h+td, x+w, y+h)
+      context.moveTo(x+Math.floor(w/2), y+h)
+      context.lineTo(x+Math.floor(w/2), y)
       // console.log(shape.getAttr('width'))
       context.closePath();
       // (!) Konva specific method, it is very important
       context.fillStrokeShape(shape);
-      // console.log(shape.getAttr('width'))
+      // console.log(shape.attrs.x)
     },
     // dragBoundFunc:  (pos) => {
+    //   // var newY = pos.y < 50 ? 50 : pos.y;
     //   console.log(pos)
-    //   return pos
-      // var newY = pos.y < 50 ? 50 : pos.y;
-      // return {
-      //   x: pos.x,
-      //   y: newY,
-      // };
+    //   return {
+    //     x: pos.x,
+    //     y: pos.y,
+    //   };
     // },
     id: tagName,
     fill: color,
@@ -37,10 +42,10 @@ const createCustomShape = ({tagName, x=200, y=50, w=50, h=70, td=20, color}) => 
     boundary: {x: x, y:y-td, w:w, h: h+(td*2)} //should be rectangle / square
   });
   // console.log(customShape.getAttr('boundary'))
-  addListeners(customShape)
-  layer.add(customShape)
+  addListeners(CustomShape)
+  layer.add(CustomShape)
   layer.draw()
-  return customShape
+  return CustomShape
 }
 
 // const addNewShape = ({id, color}) => {

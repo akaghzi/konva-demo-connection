@@ -6,13 +6,13 @@ const addListeners = (shape) => {
       updateConnection(ct.getAttr('connections'))
     }
   })
-  shape.on('end', (e) => {
+  shape.on('dragend', (e) => {
     const ct = e.currentTarget
-    const boundary = ct.getAttr('boundary')
-    console.log('old:',boundary)
+    const boundary = ct.getAttr('boundary') || ct.getClientRect()
+    // console.log('old:',boundary)
     boundary.x=boundary.x+ct.x()
     boundary.y=boundary.y+ct.y()
-    console.log('old:',boundary)
+    // console.log('old:',boundary)
   })
   shape.on('mouseover', (e) => {
     const ct = e.target

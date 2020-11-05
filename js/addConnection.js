@@ -13,8 +13,8 @@ const addConnection= (connection) => {
   const endXOffset = endX-to.x()
   const endYOffset = endY-to.y()
   const points = [startX, startY,
-    midX, startY,
-    midX, endY,
+    // midX, startY,
+    // midX, endY,
     endX, endY]
 
   const conn = new Konva.Arrow({

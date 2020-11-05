@@ -1,7 +1,9 @@
+let canvas_width = window.innerWidth
+let canvas_height = window.innerHeight
 const stage = new Konva.Stage({
   container: 'kroot',
-  width: 1080,
-  height: 900
+  width: canvas_width,
+  height: canvas_height
 })
 const layer = new Konva.Layer()
 stage.add(layer)
@@ -49,15 +51,21 @@ stage.on('contextmenu', function (e) {
       stage.getPointerPosition().x + 12 + 'px';
 });
 
-const greenCircle = createCircle({x: 50, y: 50, radius: 40, color: 'green', tagName: 'greenCircle'})
+// const greenCircle = createCircle({x: 50, y: 50, radius: 40, color: 'green', tagName: 'greenCircle'})
 
 // const blueCircle = createCircle({x: 250, y: 250, radius: 50, color: 'blue', tagName: 'blueCircle'})
 
-const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', tagName: 'redCircle'})
+// const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', tagName: 'redCircle'})
 
-const customShape1 = createCustomShape({tagName: 'customShape1', color: '#00D2FF'})
+const c1 = createCustomShape({tagName: 'cShape1', x:100, y:50, color: '#00D2FF'})
 
-const customShape2 = createCustomShape({tagName: 'customShape2', x: 400, y: 50, w:60, h:80, td: 20, color: 'orange'})
+const c2 = createCustomShape({tagName: 'cShape2', x:400, y:50, color: 'orange'})
+
+const c3 = createCustomShape({tagName: 'cShape3', x:250, y:175, color: 'lightgrey'})
+
+const c4 = createCustomShape({tagName: 'cShape4', x:100, y:300, color: 'green'})
+
+const c5 = createCustomShape({tagName: 'cShape5', x:400, y:300, color: 'red'})
 
 activateStageTriggers(stage)
 

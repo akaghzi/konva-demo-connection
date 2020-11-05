@@ -16,10 +16,10 @@ const updateConnection = (names) =>{
     const midX = startX + Math.floor((endX - startX)/2)
     points[0] = startX
     points[1] = startY
-    points[2] = midX
-    points[3] = startY
-    points[4] = midX
-    points[5] = endY
+    // points[2] = midX
+    // points[3] = startY
+    // points[4] = midX
+    // points[5] = endY
     points[points.length-2] = endX
     points[points.length-1] = endY
     // layer.draw()
