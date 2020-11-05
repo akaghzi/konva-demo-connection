@@ -58,13 +58,9 @@ stage.on('contextmenu', function (e) {
 // const redCircle = createCircle({x: 300, y: 250, radius: 50, color: 'red', tagName: 'redCircle'})
 
 const c1 = createCustomShape({tagName: 'cShape1', x:100, y:50, color: '#00D2FF'})
-
 const c2 = createCustomShape({tagName: 'cShape2', x:400, y:50, color: 'orange'})
-
 const c3 = createCustomShape({tagName: 'cShape3', x:250, y:175, color: 'lightgrey'})
-
 const c4 = createCustomShape({tagName: 'cShape4', x:100, y:300, color: 'green'})
-
 const c5 = createCustomShape({tagName: 'cShape5', x:400, y:300, color: 'red'})
 
 activateStageTriggers(stage)
