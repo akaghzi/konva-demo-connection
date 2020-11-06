@@ -63,7 +63,7 @@ const c3 = createCustomShape({tagName: 'cShape3', x:250, y:175, color: 'lightgre
 const c4 = createCustomShape({tagName: 'cShape4', x:100, y:300, color: 'green'})
 const c5 = createCustomShape({tagName: 'cShape5', x:400, y:300, color: 'red'})
 
-activateStageTriggers(stage)
+addStageListeners(stage)
 
 // const btn1 = document.querySelector("#btn-1")
 // btn1.addEventListener('click', createConnection(circle0, circle1))

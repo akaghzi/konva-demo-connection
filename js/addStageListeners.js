@@ -1,6 +1,6 @@
 let initConnection = 0
 const conn = {}
-const activateStageTriggers = () => {
+const addStageListeners = () => {
   stage.on('dblclick', (e) => {
     // console.log(e.evt)
     const t = e.target
@@ -10,7 +10,6 @@ const activateStageTriggers = () => {
         console.log('first clicked')
         conn.source = {
           name: t.getAttr('id'),
-          // we need to adjust following according to hit region
           startPosition: stage.getPointerPosition()
         }
         initConnection = 1

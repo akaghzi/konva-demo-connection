@@ -3,18 +3,24 @@ const addConnection= (connection) => {
   const from = stage.findOne(`#${connection.source.name}`)
   const to = stage.findOne(`#${connection.target.name}`)
   const connName = `${connection.source.name}-${connection.target.name}-${Math.floor(Math.random()*100)}`
+  // we need to adjust following according to hit region
   const startX = connection.source.startPosition.x
   const startY = connection.source.startPosition.y
+  const pos = {x: connection.source.startPosition.x, y: connection.source.startPosition.y}
+  console.log(pos)
+  console.log(getHitRegion(pos, from))
+  // we need to adjust following according to hit region
   const endX = connection.target.endPosition.x
   const endY = connection.target.endPosition.y
   const midX = startX + Math.floor((endX - startX)/2)
   const startXOffset = startX-from.x()
   const startYOffset = startY-from.y()
+  // we need to adjust following according to hit region
   const endXOffset = endX-to.x()
   const endYOffset = endY-to.y()
   const points = [startX, startY,
-    // midX, startY,
-    // midX, endY,
+    midX, startY,
+    midX, endY,
     endX, endY]
 
   const conn = new Konva.Arrow({
