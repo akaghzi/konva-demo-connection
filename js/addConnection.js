@@ -1,4 +1,7 @@
 const addConnection= (connection) => {
+  const fixedBreak = 10
+  let sTurn = {}
+  let eTurn = {}
   // console.log(connection)
   const from = stage.findOne(`#${connection.source.name}`)
   const to = stage.findOne(`#${connection.target.name}`)
@@ -6,21 +9,51 @@ const addConnection= (connection) => {
   // we need to adjust following according to hit region
   const startX = connection.source.startPosition.x
   const startY = connection.source.startPosition.y
-  const pos = {x: connection.source.startPosition.x, y: connection.source.startPosition.y}
-  console.log(pos)
-  console.log(getHitRegion(pos, from))
+  const sPos = {x: connection.source.startPosition.x, y: connection.source.startPosition.y}
+  console.log(sPos)
+  switch(getHitRegion(sPos, from).name){
+    case 'top':
+      sTurn = {x: sPos.x, y: sPos.y-fixedBreak }
+      break
+    case 'bottom':
+      sTurn = {x: sPos.x, y: sPos.y+fixedBreak }
+      break
+    case 'left':
+      sTurn = {x: sPos.x-fixedBreak, y: sPos.y}
+      break
+    default:
+      sTurn = {x: sPos.x+fixedBreak, y: sPos.y}
+  }
   // we need to adjust following according to hit region
   const endX = connection.target.endPosition.x
   const endY = connection.target.endPosition.y
-  const midX = startX + Math.floor((endX - startX)/2)
+  const ePos = {x: connection.target.endPosition.x, y: connection.target.endPosition.y}
+  console.log(ePos)
+  console.log(getHitRegion(ePos, to))
+  switch(getHitRegion(ePos, to).name){
+    case 'top':
+      eTurn = {x: ePos.x, y: ePos.y-fixedBreak }
+      break
+    case 'bottom':
+      eTurn = {x: ePos.x, y: ePos.y+fixedBreak }
+      break
+    case 'left':
+      eTurn = {x: ePos.x-fixedBreak, y: ePos.y}
+      break
+    default:
+      eTurn = {x: ePos.x+fixedBreak, y: ePos.y}
+  }
+  const midX = sTurn.x + Math.floor((eTurn.x - sTurn.x)/2)
   const startXOffset = startX-from.x()
   const startYOffset = startY-from.y()
   // we need to adjust following according to hit region
   const endXOffset = endX-to.x()
   const endYOffset = endY-to.y()
   const points = [startX, startY,
-    midX, startY,
-    midX, endY,
+      sTurn.x, sTurn.y,
+    midX, sTurn.y,
+    midX, eTurn.y,
+      eTurn.x, eTurn.y,
     endX, endY]
 
   const conn = new Konva.Arrow({

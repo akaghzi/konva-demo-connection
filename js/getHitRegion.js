@@ -12,7 +12,7 @@ const getHitRegion = (pos, obj) => {
     pos.y <= hr.boundary.y + hr.boundary.h
     )
   })
-  return hitRegion[0].name
+  return hitRegion[0]
   // if(hitRegion.length > 0){
   //   return hitRegion
   // } else {
