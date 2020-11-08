@@ -69,7 +69,7 @@ const updateConnection = (names) => {
     // points[points.length-3] = eTurn.y
     // points[points.length-2] = endX
     // points[points.length-1] = endY
-    layer.draw()
+    // layer.draw()
   })
   layer.batchDraw()
 }
