@@ -31,8 +31,8 @@ const updateConnection = (names) => {
     eTurn.x = end.x + eTurnOffset.x
     eTurn.y = end.y + eTurnOffset.y
 
-    const midX = sTurn.x + Math.floor((eTurn.x - sTurn.x) / 2)
-
+    // const midX = sTurn.x + Math.floor((eTurn.x - sTurn.x) / 2)
+    const midX = eTurn.x - sTurn.x <=0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x)/2)
 
     points[0] = start.x
     points[1] = start.y

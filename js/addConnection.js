@@ -48,7 +48,7 @@ const addConnection= (connection) => {
     default:
       eTurn = {x: ePos.x+fixedBreak, y: ePos.y}
   }
-  const midX = sTurn.x + Math.floor((eTurn.x - sTurn.x)/2)
+  const midX = eTurn.x - sTurn.x <=0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x)/2)
   const startXOffset = startX-from.x()
   const startYOffset = startY-from.y()
   // we need to adjust following according to hit region
