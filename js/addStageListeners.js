@@ -1,6 +1,6 @@
 let initConnection = 0
-const conn = {}
 const addStageListeners = () => {
+  const conn = {}
   stage.on('dblclick', (e) => {
     // console.log(e.evt)
     const t = e.target

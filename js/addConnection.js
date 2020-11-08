@@ -1,5 +1,6 @@
+const fixedBreak = 10
 const addConnection= (connection) => {
-  const fixedBreak = 10
+
   let sTurn = {}
   let eTurn = {}
   // console.log(connection)
@@ -10,7 +11,9 @@ const addConnection= (connection) => {
   const startX = connection.source.startPosition.x
   const startY = connection.source.startPosition.y
   const sPos = {x: connection.source.startPosition.x, y: connection.source.startPosition.y}
-  console.log(sPos)
+  console.log('start position',sPos)
+  console.log('sPos match',getHitRegion(sPos, from))
+
   switch(getHitRegion(sPos, from).name){
     case 'top':
       sTurn = {x: sPos.x, y: sPos.y-fixedBreak }
@@ -24,12 +27,14 @@ const addConnection= (connection) => {
     default:
       sTurn = {x: sPos.x+fixedBreak, y: sPos.y}
   }
+  console.log('sTurn',sTurn)
   // we need to adjust following according to hit region
   const endX = connection.target.endPosition.x
   const endY = connection.target.endPosition.y
-  const ePos = {x: connection.target.endPosition.x, y: connection.target.endPosition.y}
-  console.log(ePos)
-  console.log(getHitRegion(ePos, to))
+  const ePos = connection.target.endPosition
+  // const ePos = {x: connection.target.endPosition.x, y: connection.target.endPosition.y}
+  console.log('end position',ePos)
+  console.log('ePos match',getHitRegion(ePos, to))
   switch(getHitRegion(ePos, to).name){
     case 'top':
       eTurn = {x: ePos.x, y: ePos.y-fixedBreak }
@@ -67,7 +72,9 @@ const addConnection= (connection) => {
     pointerWidth: 5,
     draggable: false,
     name: 'process',
-    connections: [connName]
+    connections: [connName],
+    sTurnOffset: {x: sTurn.x-startX, y: sTurn.y-startY},
+    eTurnOffset: {x: eTurn.x-endX, y: eTurn.y-endY}
   })
   from.getAttr('connections').push(connName)
   to.getAttr('connections').push(connName)

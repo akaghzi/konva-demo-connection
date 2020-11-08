@@ -25,6 +25,7 @@ const createCustomShape = ({tagName, x = 200, y = 50, w = 50, h = 70, td = 20, c
     draggable: true,
     name: 'process',
     connections: [],
+    td,
     boundary: {x: x, y: y - Math.floor(td/2), w: w, h: h + td}, //should be rectangle / square
     hitRegions: [
       {name: 'top', boundary: {x, y: y - Math.floor(td/2), w, h: Math.floor(td/2)}},
