@@ -1,31 +1,24 @@
 const addListeners = (shape) => {
   shape.on('dragend', (e) => {
     const ct = e.currentTarget
-    const boundary = ct.getAttr('boundary') || ct.getClientRect()
-    // console.log('old:',boundary)
-    boundary.x=boundary.x+ct.x()
-    boundary.y=boundary.y+ct.y()
+    // console.log('boundary old',ct.attrs.boundary)
+    const boundary = ct.attrs.boundary || ct.getClientRect()
+    const boundaryOffet = ct.attrs.boundaryOffset
+    boundary.x=ct.x() + boundaryOffet.x
+    boundary.y=ct.y() + boundaryOffet.y
+    // console.log('boundary new',ct.attrs.boundary)
     const hitRegions = ct.getAttr('hitRegions')
+    // fix this code to set the hitRegion boundaries properly
     hitRegions.forEach((hr)=>{
-      hr.boundary.x += ct.x()
-      hr.boundary.y += ct.y()
+      hr.boundary.x = hr.boundaryOffset.x + ct.x()
+      hr.boundary.y = hr.boundaryOffset.y + ct.y()
     })
-    // console.log('old:',boundary)
     updateConnection(ct.getAttr('connections'))
   })
-  shape.on('mouseover', (e) => {
-    const ct = e.target
+  shape.on('mouseover', () => {
     document.body.style.cursor = 'pointer';
   })
   shape.on('mouseout', () => {
     document.body.style.cursor = 'default';
-  })
-  shape.on('click', (e) => {
-    const ct = e.target
-    if(ct instanceof Konva.Circle){
-      return
-    } else if(ct instanceof Konva.Shape) {
-      // console.log(stage.getPointerPosition())
-    }
   })
 }
