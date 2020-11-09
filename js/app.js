@@ -14,7 +14,7 @@ const contextMenu = document.getElementById('contextMenu');
 const addMenu = document.getElementById('addMenu');
 
 document.getElementById('delete-button').addEventListener('click', () => {
-  console.log(currentShape)
+  console.log('removing shape',currentShape)
   removeShape(currentShape)
 });
 
