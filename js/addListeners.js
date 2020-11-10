@@ -20,4 +20,8 @@ const addListeners = (shape) => {
   shape.on('mouseout', () => {
     document.body.style.cursor = 'default';
   })
+  // shape.on('dragend', (e) => {
+  //   const ct = e.currentTarget
+  //   console.log(ct.id(),' dragend')
+  // })
 }

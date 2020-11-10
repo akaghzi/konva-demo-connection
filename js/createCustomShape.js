@@ -24,6 +24,7 @@ const createCustomShape = ({tagName, x = 200, y = 50, w = 50, h = 70, td = 20, c
     strokeWidth: 1,
     draggable: true,
     name: 'process',
+    shapeType: 'unitOperation',
     connections: [],
     td,
     //should be rectangle / square

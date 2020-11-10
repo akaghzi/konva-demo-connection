@@ -55,7 +55,7 @@ const addConnection = (connection) => {
     eExtraTurn.y = to.attrs.boundary.y - fixedBreak
   }
 
-  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 2)
+  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 4)
   const startXOffset = startX - from.x()
   const startYOffset = startY - from.y()
   // we need to adjust following according to hit region
@@ -70,6 +70,13 @@ const addConnection = (connection) => {
     eTurn.x, eTurn.y,
     endX, endY]
 
+  const junk = (points) => {
+    for(let i=2;i<points.length-4; i=i+2){
+      console.log(points[i],points[i+1],points[i+2],points[i+3])
+    }
+  }
+  junk(points)
+
   const conn = new Konva.Arrow({
     id: connName,
     strokeWidth: 2,
@@ -81,6 +88,7 @@ const addConnection = (connection) => {
     pointerWidth: 5,
     draggable: false,
     name: 'process',
+    shapeType: 'normalStream',
     connections: [connName],
     sTurnOffset: {x: sTurn.x - startX, y: sTurn.y - startY},
     eTurnOffset: {x: eTurn.x - endX, y: eTurn.y - endY, connectingFrom: eTurn.connectingFrom}
