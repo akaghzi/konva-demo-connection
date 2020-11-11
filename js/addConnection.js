@@ -55,7 +55,7 @@ const addConnection = (connection) => {
     eExtraTurn.y = to.attrs.boundary.y - fixedBreak
   }
 
-  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 5)
+  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 2)
   const startXOffset = startX - from.x()
   const startYOffset = startY - from.y()
   // we need to adjust following according to hit region
@@ -74,17 +74,41 @@ const addConnection = (connection) => {
 
   const junk = (from, to, points) => {
     let segments = []
-    for(let i=2;i<points.length-4; i=i+2){
-      segments.push([points[i],points[i+1],points[i+2],points[i+3]])
+    for (let i = 2; i < points.length - 4; i = i + 2) {
+      segments.push({x1: points[i], y1: points[i + 1], x2: points[i + 2], y2: points[i + 3]})
     }
     console.log(segments)
-    const unitOperations = stage.find('.process').filter((unitOperation)=>{
+    const seg = new Konva.Line({
+      points: [segments[0].x1, segments[0].y1, segments[0].x2, segments[0].y2],
+      stroke: 'red',
+      strokeWidth: 4
+    })
+    layer.add(seg)
+    layer.draw()
+
+    console.log('seg', segments[0])
+    const unitOperations = stage.find('.process').filter((unitOperation) => {
       return (unitOperation.attrs.shapeType === 'unitOperation' &&
           unitOperation.id() !== from.id() &&
           unitOperation.id() !== to.id()
       )
     })
-    console.log(unitOperations)
+    // console.log(unitOperations)
+    const uo = unitOperations[0]
+    const b = uo.attrs.boundary
+    console.log(uo.id(), b)
+    if ((
+        segments[1].x2 - segments[1].x1 === 0 &&
+        (segments[1].x1 >= b.x && segments[1].x1 <= b.x+b.w) &&
+        b.y <= segments[1].y2
+    ) || (
+        (segments[0].y2 - segments[0].y1 === 0) &&
+        (segments[0].y1 >= b.y && segments[0].y1 <= b.y+b.h) &&
+    b.x <= segments[0].x2
+    )
+    ) {
+      console.log('intersected')
+    }
   }
   junk(from, to, points)
 
