@@ -40,7 +40,7 @@ const updateConnection = (names) => {
       eExtraTurn.y = to.attrs.boundary.y - fixedBreak -10
     }
 
-    const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 4)
+    const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 5)
     // const points = [startX, startY,
     //   sTurn.x, sTurn.y,
     //   midX, sTurn.y,

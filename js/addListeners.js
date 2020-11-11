@@ -1,5 +1,5 @@
 const addListeners = (shape) => {
-  shape.on('dragmove', (e) => {
+  shape.on('dragend', (e) => {
     const ct = e.currentTarget
     // console.log('boundary old',ct.attrs.boundary)
     const boundary = ct.attrs.boundary || ct.getClientRect()

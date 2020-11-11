@@ -55,7 +55,7 @@ const addConnection = (connection) => {
     eExtraTurn.y = to.attrs.boundary.y - fixedBreak
   }
 
-  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 4)
+  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 5)
   const startXOffset = startX - from.x()
   const startYOffset = startY - from.y()
   // we need to adjust following according to hit region
@@ -70,12 +70,25 @@ const addConnection = (connection) => {
     eTurn.x, eTurn.y,
     endX, endY]
 
-  const junk = (points) => {
+  // WORK IN PROGRESS STARTS HERE
+
+  const junk = (from, to, points) => {
+    let segments = []
     for(let i=2;i<points.length-4; i=i+2){
-      console.log(points[i],points[i+1],points[i+2],points[i+3])
+      segments.push([points[i],points[i+1],points[i+2],points[i+3]])
     }
+    console.log(segments)
+    const unitOperations = stage.find('.process').filter((unitOperation)=>{
+      return (unitOperation.attrs.shapeType === 'unitOperation' &&
+          unitOperation.id() !== from.id() &&
+          unitOperation.id() !== to.id()
+      )
+    })
+    console.log(unitOperations)
   }
-  junk(points)
+  junk(from, to, points)
+
+  // WORK IN PROGRESS END HERE
 
   const conn = new Konva.Arrow({
     id: connName,
