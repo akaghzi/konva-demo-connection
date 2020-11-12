@@ -55,7 +55,7 @@ const addConnection = (connection) => {
     eExtraTurn.y = to.attrs.boundary.y - fixedBreak
   }
 
-  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 2)
+  const midX = eExtraTurn.x - sTurn.x <= 0 ? sTurn.x : sTurn.x + Math.floor((eTurn.x - sTurn.x) / 5)
   const startXOffset = startX - from.x()
   const startYOffset = startY - from.y()
   // we need to adjust following according to hit region
@@ -71,61 +71,7 @@ const addConnection = (connection) => {
     endX, endY]
 
   // WORK IN PROGRESS STARTS HERE
-  const drawIntersection = (segment) => {
-    const intLine = new Konva.Line({
-      points: [segment.x1, segment.y1, segment.x2, segment.y2],
-      stroke: 'red',
-      strokeWidth: 4
-    })
-    layer.add(intLine)
-    layer.draw()
-  }
-
-  const junk = (from, to, points) => {
-    const unitOperations = stage.find('.process').filter((unitOperation) => {
-      return (unitOperation.attrs.shapeType === 'unitOperation' &&
-          unitOperation.id() !== from.id() &&
-          unitOperation.id() !== to.id()
-      )
-    })
-    let segments = []
-    for (let i = 2; i < points.length - 4; i = i + 2) {
-      segments.push({x1: points[i], y1: points[i + 1], x2: points[i + 2], y2: points[i + 3]})
-    }
-    // console.log(segments)
-    unitOperations.forEach((unitOperation) => {
-      const boundary = unitOperation.attrs.boundary
-      segments.forEach((segment) => {
-        if (
-            segment.x2 - segment.x1 === 0 &&
-            (segment.x1 >= boundary.x && segment.x1 <= boundary.x + boundary.w) &&
-            (segment.y1 <= boundary.y && boundary.y <= segment.y2)
-        ) {
-          console.log('vertical intersection')
-          console.log(segment,
-              ' intersected with ',
-              unitOperation.id(),
-              ' boundary',
-              boundary)
-          drawIntersection(segment)
-        } else if (
-            (segment.y2 - segment.y1 === 0) &&
-            (segment.y1 >= boundary.y && segment.y1 <= boundary.y + boundary.h) &&
-            (segment.x1 < boundary.x && boundary.x <= segment.x2)
-        ) {
-          console.log('horizontal intersection')
-          console.log(segment,
-              ' intersected with ',
-              unitOperation.id(),
-              ' boundary',
-              boundary)
-          drawIntersection(segment)
-        }
-      })
-    })
-  }
-  junk(from, to, points)
-
+  haveIntersection(from, to, points)
   // WORK IN PROGRESS END HERE
 
   const conn = new Konva.Arrow({

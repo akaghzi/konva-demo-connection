@@ -49,6 +49,7 @@ const updateConnection = (names) => {
     //   eTurn.x, eExtraTurn.y,
     //   eTurn.x, eTurn.y,
     //   endX, endY]
+    haveIntersection(from, to, points)
 
     points[0] = start.x
     points[1] = start.y
