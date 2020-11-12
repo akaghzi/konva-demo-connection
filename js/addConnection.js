@@ -71,6 +71,15 @@ const addConnection = (connection) => {
     endX, endY]
 
   // WORK IN PROGRESS STARTS HERE
+  const drawIntersection = (segment) => {
+    const intLine = new Konva.Line({
+      points: [segment.x1, segment.y1, segment.x2, segment.y2],
+      stroke: 'red',
+      strokeWidth: 4
+    })
+    layer.add(intLine)
+    layer.draw()
+  }
 
   const junk = (from, to, points) => {
     const unitOperations = stage.find('.process').filter((unitOperation) => {
@@ -83,38 +92,36 @@ const addConnection = (connection) => {
     for (let i = 2; i < points.length - 4; i = i + 2) {
       segments.push({x1: points[i], y1: points[i + 1], x2: points[i + 2], y2: points[i + 3]})
     }
-    console.log(segments)
-    // const seg = new Konva.Line({
-    //   points: [segments[0].x1, segments[0].y1, segments[0].x2, segments[0].y2],
-    //   stroke: 'red',
-    //   strokeWidth: 4
-    // })
-    // layer.add(seg)
-    // layer.draw()
-
-    const uo = unitOperations[1]
-    const b = uo.attrs.boundary
-    console.log(uo.id(), b)
-    segments.forEach((segment)=>{
-      if ((
-          segment.x2 - segment.x1 === 0 &&
-          (segment.x1 >= b.x && segment.x1 <= b.x+b.w) &&
-          b.y <= segment.y2
-      ) || (
-          (segment.y2 - segment.y1 === 0) &&
-          (segment.y1 >= b.y && segment.y1 <= b.y+b.h) &&
-          b.x <= segment.x2
-      )
-      ) {
-        console.log(segment,' intersected')
-        const intLine = new Konva.Line({
-          points: [segment.x1, segment.y1, segment.x2, segment.y2],
-          stroke: 'red',
-          strokeWidth: 4
-        })
-        layer.add(intLine)
-        layer.draw()
-      }
+    // console.log(segments)
+    unitOperations.forEach((unitOperation) => {
+      const boundary = unitOperation.attrs.boundary
+      segments.forEach((segment) => {
+        if (
+            segment.x2 - segment.x1 === 0 &&
+            (segment.x1 >= boundary.x && segment.x1 <= boundary.x + boundary.w) &&
+            (segment.y1 <= boundary.y && boundary.y <= segment.y2)
+        ) {
+          console.log('vertical intersection')
+          console.log(segment,
+              ' intersected with ',
+              unitOperation.id(),
+              ' boundary',
+              boundary)
+          drawIntersection(segment)
+        } else if (
+            (segment.y2 - segment.y1 === 0) &&
+            (segment.y1 >= boundary.y && segment.y1 <= boundary.y + boundary.h) &&
+            (segment.x1 < boundary.x && boundary.x <= segment.x2)
+        ) {
+          console.log('horizontal intersection')
+          console.log(segment,
+              ' intersected with ',
+              unitOperation.id(),
+              ' boundary',
+              boundary)
+          drawIntersection(segment)
+        }
+      })
     })
   }
   junk(from, to, points)
