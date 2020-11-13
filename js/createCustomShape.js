@@ -29,7 +29,7 @@ const createCustomShape = ({tagName, x = 200, y = 50, w = 50, h = 70, td = 20, c
     td,
     //should be rectangle / square
     boundary: {x, y: y - Math.floor(td / 2), w, h: h + td},
-    boundaryOffset: {x, y},
+    boundaryOffset: {x, y: y- Math.floor(td / 2)},
     hitRegions: [
       {
         name: 'top',

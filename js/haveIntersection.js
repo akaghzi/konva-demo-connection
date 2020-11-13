@@ -9,6 +9,7 @@ const drawIntersection = (segment) => {
 }
 
 const haveIntersection = (from, to, points) => {
+  const intesectingSegments = []
   const unitOperations = stage.find('.process').filter((unitOperation) => {
     return (unitOperation.attrs.shapeType === 'unitOperation' &&
         unitOperation.id() !== from.id() &&
@@ -17,7 +18,13 @@ const haveIntersection = (from, to, points) => {
   })
   let segments = []
   for (let i = 2; i < points.length - 4; i = i + 2) {
-    segments.push({x1: points[i], y1: points[i + 1], x2: points[i + 2], y2: points[i + 3]})
+    segments.push({
+      name: 'seg-' + i,
+      x1: points[i],
+      y1: points[i + 1],
+      x2: points[i + 2],
+      y2: points[i + 3]
+    })
   }
   // console.log(segments)
   unitOperations.forEach((unitOperation) => {
@@ -34,12 +41,13 @@ const haveIntersection = (from, to, points) => {
             unitOperation.id(),
             ' boundary',
             boundary)
-        const shiftX = boundary.x - (boundary.x + boundary.w / 2)
+        const shiftX = (boundary.x + (boundary.w / 2)) - segment.x1
         console.log(shiftX)
-        segment.x1 = segment.x1 + shiftX
-        segment.x2 = segment.x2 + shiftX
-        console.log(segment)
-        drawIntersection(segment)
+        segment.x1 = shiftX > 0 ? boundary.x - 10 : boundary.x + boundary.w + 10
+        segment.x2 = shiftX > 0 ? boundary.x - 10 : boundary.x + boundary.w + 10
+        console.log('red segment', segment)
+        intesectingSegments.push(segment)
+        // drawIntersection(segment)
       } else if (
           (segment.y2 - segment.y1 === 0) &&
           (segment.y1 >= boundary.y && segment.y1 <= boundary.y + boundary.h) &&
@@ -51,8 +59,34 @@ const haveIntersection = (from, to, points) => {
             unitOperation.id(),
             ' boundary',
             boundary)
+        const shiftY = (boundary.y + (boundary.h / 2)) - segment.y1
+        console.log(shiftY)
+        segment.y1 = shiftY > 0 ? boundary.y - 10 : boundary.y + boundary.h + 10
+        segment.y2 = shiftY > 0 ? boundary.y - 10 : boundary.y + boundary.h + 10
+        console.log('red segment', segment)
+        // createRect({
+        //   tagName: 'redboundary',
+        //   x: boundary.x,
+        //   y: boundary.y,
+        //   width: boundary.w,
+        //   height: boundary.h,
+        //   color: 'blue'
+        // })
+        intesectingSegments.push(segment)
         // drawIntersection(segment)
       }
     })
   })
+  // console.log(intesectingSegments)
+  // console.log('old points',points)
+  intesectingSegments.forEach((intersectingSegment)=>{
+    const i = parseInt(intersectingSegment.name.split('-')[1])
+    console.log('i',i)
+    points[i] = intersectingSegment.x1
+    points[i+1] = intersectingSegment.y1
+    points[i+2] = intersectingSegment.x2
+    points[i+3] = intersectingSegment.y2
+  })
+  // console.log('new points',points)
+  return points
 }

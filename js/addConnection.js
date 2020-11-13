@@ -61,7 +61,7 @@ const addConnection = (connection) => {
   // we need to adjust following according to hit region
   const endXOffset = endX - to.x()
   const endYOffset = endY - to.y()
-  const points = [startX, startY,
+  let points = [startX, startY,
     sTurn.x, sTurn.y,
     midX, sTurn.y,
     midX, eExtraTurn.y,
@@ -71,7 +71,7 @@ const addConnection = (connection) => {
     endX, endY]
 
   // WORK IN PROGRESS STARTS HERE
-  haveIntersection(from, to, points)
+  points = haveIntersection(from, to, points)
   // WORK IN PROGRESS END HERE
 
   const conn = new Konva.Arrow({

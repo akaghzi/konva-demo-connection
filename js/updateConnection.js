@@ -11,7 +11,7 @@ const updateConnection = (names) => {
     const endOffset = connection.attrs.endOffset
     const sTurnOffset = connection.attrs.sTurnOffset
     const eTurnOffset = connection.attrs.eTurnOffset
-    const points = connection.attrs.points
+    let points = connection.attrs.points
     const start = {x: points[0], y: points[1]}
     const sTurn = {x: points[2], y: points[3]}
     const eTurn = {x: points[points.length - 4], y: points[points.length - 3], connectingFrom: eTurnOffset.connectingFrom}
@@ -49,7 +49,7 @@ const updateConnection = (names) => {
     //   eTurn.x, eExtraTurn.y,
     //   eTurn.x, eTurn.y,
     //   endX, endY]
-    haveIntersection(from, to, points)
+
 
     points[0] = start.x
     points[1] = start.y
@@ -68,6 +68,7 @@ const updateConnection = (names) => {
     points[points.length - 2] = end.x
     points[points.length - 1] = end.y
 
+    points = haveIntersection(from, to, points)
     // layer.draw()
   })
   layer.batchDraw()

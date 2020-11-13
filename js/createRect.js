@@ -8,7 +8,8 @@ const createRect = ({tagName, x=250, y=250, height=30, width=40, color }) => {
     fill: color,
     connections: [],
     draggable: true,
-    name: 'process'
+    name: 'process',
+    opacity: 0.7
   })
   addListeners(rect)
   layer.add(rect)
