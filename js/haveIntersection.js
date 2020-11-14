@@ -9,7 +9,7 @@ const drawIntersection = (segment) => {
 }
 
 const haveIntersection = (from, to, points) => {
-  const intesectingSegments = []
+  const intersectingSegments = []
   const unitOperations = stage.find('.process').filter((unitOperation) => {
     return (unitOperation.attrs.shapeType === 'unitOperation' &&
         unitOperation.id() !== from.id() &&
@@ -46,8 +46,7 @@ const haveIntersection = (from, to, points) => {
         segment.x1 = shiftX > 0 ? boundary.x - 10 : boundary.x + boundary.w + 10
         segment.x2 = shiftX > 0 ? boundary.x - 10 : boundary.x + boundary.w + 10
         console.log('red segment', segment)
-        intesectingSegments.push(segment)
-        // drawIntersection(segment)
+        intersectingSegments.push(segment)
       } else if (
           (segment.y2 - segment.y1 === 0) &&
           (segment.y1 >= boundary.y && segment.y1 <= boundary.y + boundary.h) &&
@@ -64,22 +63,11 @@ const haveIntersection = (from, to, points) => {
         segment.y1 = shiftY > 0 ? boundary.y - 10 : boundary.y + boundary.h + 10
         segment.y2 = shiftY > 0 ? boundary.y - 10 : boundary.y + boundary.h + 10
         console.log('red segment', segment)
-        // createRect({
-        //   tagName: 'redboundary',
-        //   x: boundary.x,
-        //   y: boundary.y,
-        //   width: boundary.w,
-        //   height: boundary.h,
-        //   color: 'blue'
-        // })
-        intesectingSegments.push(segment)
-        // drawIntersection(segment)
+        intersectingSegments.push(segment)
       }
     })
   })
-  // console.log(intesectingSegments)
-  // console.log('old points',points)
-  intesectingSegments.forEach((intersectingSegment)=>{
+  intersectingSegments.forEach((intersectingSegment)=>{
     const i = parseInt(intersectingSegment.name.split('-')[1])
     console.log('i',i)
     points[i] = intersectingSegment.x1
@@ -87,6 +75,5 @@ const haveIntersection = (from, to, points) => {
     points[i+2] = intersectingSegment.x2
     points[i+3] = intersectingSegment.y2
   })
-  // console.log('new points',points)
   return points
 }
