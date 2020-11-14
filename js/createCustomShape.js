@@ -52,11 +52,26 @@ const createCustomShape = ({tagName, x = 200, y = 50, w = 50, h = 70, td = 20, c
         boundaryOffset: {x, y: y+h}
       },
     ],
-    opacity: 0.85
+    opacity: 0.85,
+    labelOffset: {
+      x: 0,
+      y: -15
+    }
   });
-  // CustomShape.setAttr('boundaryOffsets', {x: 0, y: 0},)
+  // console.log('labeloffsetx',CustomShape.attrs.labelOffsets.x)
+  // console.log('labeloffsety',CustomShape.attrs.labelOffsets.y)
+  const label = new Konva.Label({
+    id: 'label-' + CustomShape.id(),
+    x: CustomShape.attrs.boundary.x + CustomShape.attrs.labelOffset.x,
+    y: CustomShape.attrs.boundary.y + CustomShape.attrs.labelOffset.y,
+    opacity: 0.75
+  })
+  label.add(new Konva.Text({
+    text: CustomShape.id()
+  }))
+
   addListeners(CustomShape)
-  layer.add(CustomShape)
-  layer.draw()
+  layer.add(CustomShape).add(label)
+  layer.batchDraw()
   return CustomShape
 }

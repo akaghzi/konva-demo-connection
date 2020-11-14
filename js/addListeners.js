@@ -13,6 +13,8 @@ const addListeners = (shape) => {
       hr.boundary.y = hr.boundaryOffset.y + ct.y()
     })
     updateConnection(ct.getAttr('connections'))
+    // console.log(ct.id())
+    updateLabel(ct.id())
   })
   shape.on('mouseover', () => {
     document.body.style.cursor = 'pointer';
