@@ -38,13 +38,7 @@ stage.on('contextmenu', function (e) {
     return;
   }
   currentShape = e.target;
-  // console.log(currentShape)
-  // addMenu.style.display = 'none'
-  // show menu
   contextMenu.style.display = 'initial';
-  // const containerRect = stage.container().getBoundingClientRect();
-  // console.log(containerRect)
-  // console.log(stage.getPointerPosition())
   contextMenu.style.top =
       stage.getPointerPosition().y + 6 + 'px';
   contextMenu.style.left =
@@ -64,8 +58,3 @@ const c4 = createCustomShape({tagName: 'cShape4', x:100, y:300, color: 'green'})
 const c5 = createCustomShape({tagName: 'cShape5', x:400, y:300, color: 'red'})
 
 addStageListeners(stage)
-
-// const btn1 = document.querySelector("#btn-1")
-// btn1.addEventListener('click', createConnection(circle0, circle1))
-// const btn2 = document.querySelector("#btn-2")
-// btn2.addEventListener('click', createConnection(circle1, circle2))
